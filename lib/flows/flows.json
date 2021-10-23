@@ -74,5 +74,152 @@
                 "af5b81a5.e0df8"
             ]
         ]
+    },
+    {
+        "id": "6d806c31e5d65a6f",
+        "type": "http in",
+        "z": "9ab91bb2.9ce5d8",
+        "name": "",
+        "url": "/cnpj",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 320,
+        "wires": [
+            [
+                "d0cad5976a9a59de"
+            ]
+        ]
+    },
+    {
+        "id": "fc3d8c0b7397466a",
+        "type": "http response",
+        "z": "9ab91bb2.9ce5d8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 510,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "d0cad5976a9a59de",
+        "type": "http request",
+        "z": "9ab91bb2.9ce5d8",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://ec2-34-211-68-118.us-west-2.compute.amazonaws.com:1880/cnpj",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 330,
+        "y": 320,
+        "wires": [
+            [
+                "fc3d8c0b7397466a"
+            ]
+        ]
+    },
+    {
+        "id": "9a49fee54a728cde",
+        "type": "http in",
+        "z": "9ab91bb2.9ce5d8",
+        "name": "",
+        "url": "/cpf",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 380,
+        "wires": [
+            [
+                "fa580d51b8729fe4"
+            ]
+        ]
+    },
+    {
+        "id": "69872682ab208f8b",
+        "type": "http response",
+        "z": "9ab91bb2.9ce5d8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 510,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "fa580d51b8729fe4",
+        "type": "http request",
+        "z": "9ab91bb2.9ce5d8",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://ec2-34-211-68-118.us-west-2.compute.amazonaws.com:1880/cpf1",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 330,
+        "y": 380,
+        "wires": [
+            [
+                "69872682ab208f8b"
+            ]
+        ]
+    },
+    {
+        "id": "c017ea2139935a0c",
+        "type": "http in",
+        "z": "9ab91bb2.9ce5d8",
+        "name": "",
+        "url": "/gerar-cid",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 440,
+        "wires": [
+            [
+                "90bae70fce454118"
+            ]
+        ]
+    },
+    {
+        "id": "35602dddefeb7706",
+        "type": "http response",
+        "z": "9ab91bb2.9ce5d8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 510,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "90bae70fce454118",
+        "type": "http request",
+        "z": "9ab91bb2.9ce5d8",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://54.234.138.123:1880/gerar-cid",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 370,
+        "y": 440,
+        "wires": [
+            [
+                "35602dddefeb7706"
+            ]
+        ]
     }
 ]
