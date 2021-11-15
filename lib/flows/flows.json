@@ -221,5 +221,54 @@
                 "35602dddefeb7706"
             ]
         ]
+    },
+    {
+        "id": "16ccff4b05933c33",
+        "type": "http in",
+        "z": "9ab91bb2.9ce5d8",
+        "name": "",
+        "url": "/fraudometros",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 210,
+        "y": 80,
+        "wires": [
+            [
+                "0ce2aebc814c47a0"
+            ]
+        ]
+    },
+    {
+        "id": "6a1f2be3a3867c87",
+        "type": "http response",
+        "z": "9ab91bb2.9ce5d8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 570,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "0ce2aebc814c47a0",
+        "type": "http request",
+        "z": "9ab91bb2.9ce5d8",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://resolvrisk.com.br:1880/api/v1/fraudometros",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 410,
+        "y": 100,
+        "wires": [
+            [
+                "6a1f2be3a3867c87"
+            ]
+        ]
     }
 ]
