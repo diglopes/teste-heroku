@@ -403,7 +403,7 @@
                 "t": "set",
                 "p": "payload.dados",
                 "pt": "msg",
-                "to": "[{\"acao\":\"tts\",\"acao_dados\":{\"mensagem\":\"Seja bem-vindo ao teste de URA! Esta é a primeira etapa. Digite o seu CEP para que eu possa identificar o seu endereço\",\"coletar_dtmf\":8,\"timeout\":30}},{\"acao\":\"dinamico\",\"acao_dados\":{\"url\":\"https://the-nodes-tim.herokuapp.com/ura?step=zipcode\"}}]",
+                "to": "[{\"acao\":\"tts\",\"acao_dados\":{\"mensagem\":\"Seja bem-vindo ao teste de URA! Esta é a primeira etapa. Digite o seu CEP para que eu possa identificar o seu endereço\",\"coletar_dtmf\":\"8\",\"timeout\":\"30\"}},{\"acao\":\"dinamico\",\"acao_dados\":{\"url\":\"https://the-nodes-tim.herokuapp.com/ura?step=zipcode\"}}]",
                 "tot": "json"
             }
         ],
@@ -571,7 +571,7 @@
         "fieldType": "msg",
         "format": "json",
         "syntax": "mustache",
-        "template": "{\n    \"nome\": \"Zipcode\",\n    \"dados\": [\n        {\n            \"acao\": \"tts\",\n            \"acao_dados\": {\n                \"mensagem\": \"Ops! Parece que o CEP digitado é inválido, digite novamente os 8 digitos, por favor\",\n                \"coletar_dtmf\": 8,\n                \"timeout\": 30\n            }\n        },\n        {\n            \"acao\": \"dinamico\",\n            \"acao_dados\": {\n                \"url\": \"https://the-nodes-tim.herokuapp.com/ura?step=zipcode\"\n            }\n        }\n    ]\n}",
+        "template": "{\n    \"nome\": \"Zipcode\",\n    \"dados\": [\n        {\n            \"acao\": \"tts\",\n            \"acao_dados\": {\n                \"mensagem\": \"Opa! Parece que o CEP digitado é inválido. Digite novamente os 8 dígitos, por favor\",\n                \"coletar_dtmf\": \"8\",\n                \"timeout\": \"30\"\n            }\n        },\n        {\n            \"acao\": \"dinamico\",\n            \"acao_dados\": {\n                \"url\": \"https://the-nodes-tim.herokuapp.com/ura?step=zipcode\"\n            }\n        }\n    ]\n}",
         "output": "json",
         "x": 790,
         "y": 200,
