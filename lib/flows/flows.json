@@ -361,7 +361,7 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 140,
+        "x": 80,
         "y": 180,
         "wires": [
             [
@@ -377,7 +377,7 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 650,
+        "x": 930,
         "y": 180,
         "wires": []
     },
@@ -403,7 +403,7 @@
                 "t": "set",
                 "p": "payload.dados",
                 "pt": "msg",
-                "to": "[{\"acao\":\"tts\",\"acao_dados\":{\"mensagem\":\"Seja bem-vindo ao teste de URA! Esta é a primeira etapa.\"}},{\"acao\":\"tts\",\"acao_dados\":{\"mensagem\":\"Digite o seu CEP para que eu possa identificar o seu endereço\"}}]",
+                "to": "[{\"acao\":\"tts\",\"acao_dados\":{\"mensagem\":\"Seja bem-vindo ao teste de URA! Esta é a primeira etapa. Digite o seu CEP para que eu possa identificar o seu endereço\",\"coletar_dtmf\":8,\"timeout\":30}},{\"acao\":\"dinamico\",\"acao_dados\":{\"url\":\"https://the-nodes-tim.herokuapp.com/ura?step=zipcode\"}}]",
                 "tot": "json"
             }
         ],
@@ -412,11 +412,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 490,
+        "x": 390,
         "y": 120,
         "wires": [
             [
-                "006d60d38b4764c2"
+                "6ec26f7f4c481999"
             ]
         ]
     },
@@ -433,7 +433,7 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 340,
+        "x": 220,
         "y": 240,
         "wires": [
             []
@@ -451,17 +451,145 @@
                 "t": "eq",
                 "v": "start",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "zipcode",
+                "vt": "str"
             }
         ],
         "checkall": "false",
         "repair": false,
-        "outputs": 1,
-        "x": 330,
+        "outputs": 2,
+        "x": 230,
         "y": 180,
         "wires": [
             [
                 "b1dab3b3f03af470"
+            ],
+            [
+                "51b8e08c94437a8e"
             ]
         ]
+    },
+    {
+        "id": "acc7961e8d623bc3",
+        "type": "http request",
+        "z": "87be6b70d2067abc",
+        "name": "viacep",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 510,
+        "y": 180,
+        "wires": [
+            [
+                "e17d495f52c244f5"
+            ]
+        ]
+    },
+    {
+        "id": "51b8e08c94437a8e",
+        "type": "template",
+        "z": "87be6b70d2067abc",
+        "name": "url",
+        "field": "url",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "https://viacep.com.br/ws/{{payload.ultimo_dtmf}}/json",
+        "output": "str",
+        "x": 390,
+        "y": 180,
+        "wires": [
+            [
+                "acc7961e8d623bc3"
+            ]
+        ]
+    },
+    {
+        "id": "1b77128273a998ca",
+        "type": "template",
+        "z": "87be6b70d2067abc",
+        "name": "valid",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "mustache",
+        "template": "{\n    \"nome\": \"Zipcode\",\n    \"dados\": [\n        {\n            \"acao\": \"tts\",\n            \"acao_dados\": {\n                \"mensagem\": \"Certo. Identifiquei que você mora em {{ payload.logradouro }}, no bairro {{ payload.bairro}}, na cidade de {{ payload.localidade }}\"\n            }\n        }\n    ]\n}",
+        "output": "json",
+        "x": 790,
+        "y": 160,
+        "wires": [
+            [
+                "006d60d38b4764c2"
+            ]
+        ]
+    },
+    {
+        "id": "e17d495f52c244f5",
+        "type": "switch",
+        "z": "87be6b70d2067abc",
+        "name": "validate",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "200",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 640,
+        "y": 180,
+        "wires": [
+            [
+                "1b77128273a998ca"
+            ],
+            [
+                "cad486c56ad41c30"
+            ]
+        ]
+    },
+    {
+        "id": "cad486c56ad41c30",
+        "type": "template",
+        "z": "87be6b70d2067abc",
+        "name": "invalid",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "mustache",
+        "template": "{\n    \"nome\": \"Zipcode\",\n    \"dados\": [\n        {\n            \"acao\": \"tts\",\n            \"acao_dados\": {\n                \"mensagem\": \"Ops! Parece que o CEP digitado é inválido, digite novamente os 8 digitos, por favor\",\n                \"coletar_dtmf\": 8,\n                \"timeout\": 30\n            }\n        },\n        {\n            \"acao\": \"dinamico\",\n            \"acao_dados\": {\n                \"url\": \"https://the-nodes-tim.herokuapp.com/ura?step=zipcode\"\n            }\n        }\n    ]\n}",
+        "output": "json",
+        "x": 790,
+        "y": 200,
+        "wires": [
+            [
+                "006d60d38b4764c2"
+            ]
+        ]
+    },
+    {
+        "id": "6ec26f7f4c481999",
+        "type": "http response",
+        "z": "87be6b70d2067abc",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 530,
+        "y": 120,
+        "wires": []
     }
 ]
