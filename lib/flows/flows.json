@@ -357,15 +357,16 @@
         "type": "http in",
         "z": "87be6b70d2067abc",
         "name": "",
-        "url": "/ura/steps/welcome",
+        "url": "/ura",
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 190,
+        "x": 140,
         "y": 180,
         "wires": [
             [
-                "b1dab3b3f03af470"
+                "25614bda9e26fa3d",
+                "644dcac99c897b23"
             ]
         ]
     },
@@ -376,7 +377,7 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 510,
+        "x": 650,
         "y": 180,
         "wires": []
     },
@@ -384,7 +385,7 @@
         "id": "b1dab3b3f03af470",
         "type": "change",
         "z": "87be6b70d2067abc",
-        "name": "ura",
+        "name": "start",
         "rules": [
             {
                 "t": "delete",
@@ -402,7 +403,7 @@
                 "t": "set",
                 "p": "payload.dados",
                 "pt": "msg",
-                "to": "[{\"acao\":\"tts\",\"acao_dados\":{\"mensagem\":\"Seja bem-vindo ao teste de URA! Esta é a primeira etapa.\"}}]",
+                "to": "[{\"acao\":\"tts\",\"acao_dados\":{\"mensagem\":\"Seja bem-vindo ao teste de URA! Esta é a primeira etapa.\"}},{\"acao\":\"tts\",\"acao_dados\":{\"mensagem\":\"Digite o seu CEP para que eu possa identificar o seu endereço\"}}]",
                 "tot": "json"
             }
         ],
@@ -411,11 +412,55 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 390,
-        "y": 180,
+        "x": 490,
+        "y": 120,
         "wires": [
             [
                 "006d60d38b4764c2"
+            ]
+        ]
+    },
+    {
+        "id": "25614bda9e26fa3d",
+        "type": "http request",
+        "z": "87be6b70d2067abc",
+        "name": "Webhook",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://webhook.site/87ed3353-280d-418d-bf4f-8fd0b2b9a108",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 340,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "644dcac99c897b23",
+        "type": "switch",
+        "z": "87be6b70d2067abc",
+        "name": "step check",
+        "property": "req.query.step",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "start",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 1,
+        "x": 330,
+        "y": 180,
+        "wires": [
+            [
+                "b1dab3b3f03af470"
             ]
         ]
     }
