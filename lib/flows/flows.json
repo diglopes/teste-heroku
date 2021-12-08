@@ -7,6 +7,20 @@
         "info": ""
     },
     {
+        "id": "b9a910fea35c5710",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "87be6b70d2067abc",
+        "type": "tab",
+        "label": "URA Dinamica",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "cf6ba580.d136e8",
         "type": "http in",
         "z": "9ab91bb2.9ce5d8",
@@ -268,6 +282,133 @@
         "wires": [
             [
                 "6a1f2be3a3867c87"
+            ]
+        ]
+    },
+    {
+        "id": "b95e9f347f5c45ce",
+        "type": "inject",
+        "z": "b9a910fea35c5710",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 120,
+        "wires": [
+            [
+                "a1a1b8e9b63abad5"
+            ]
+        ]
+    },
+    {
+        "id": "a1a1b8e9b63abad5",
+        "type": "http request",
+        "z": "b9a910fea35c5710",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://www.amazoniaplanos.com.br/boleto/?idSessao=46740e9d7566a895c98631ebfeaf9530&id_pagamento=1137903",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 460,
+        "y": 120,
+        "wires": [
+            [
+                "da690b9290b33e91"
+            ]
+        ]
+    },
+    {
+        "id": "da690b9290b33e91",
+        "type": "debug",
+        "z": "b9a910fea35c5710",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "16bae51fc37c54f1",
+        "type": "http in",
+        "z": "87be6b70d2067abc",
+        "name": "",
+        "url": "/input",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 220,
+        "y": 180,
+        "wires": [
+            [
+                "b1dab3b3f03af470"
+            ]
+        ]
+    },
+    {
+        "id": "006d60d38b4764c2",
+        "type": "http response",
+        "z": "87be6b70d2067abc",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 550,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "b1dab3b3f03af470",
+        "type": "change",
+        "z": "87be6b70d2067abc",
+        "name": "ura",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.nome",
+                "pt": "msg",
+                "to": "Teste URA Dinamica",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 180,
+        "wires": [
+            [
+                "006d60d38b4764c2"
             ]
         ]
     }
