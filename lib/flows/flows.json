@@ -357,11 +357,11 @@
         "type": "http in",
         "z": "87be6b70d2067abc",
         "name": "",
-        "url": "/input",
+        "url": "/ura/steps/welcome",
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 220,
+        "x": 190,
         "y": 180,
         "wires": [
             [
@@ -376,7 +376,7 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 550,
+        "x": 510,
         "y": 180,
         "wires": []
     },
@@ -397,6 +397,13 @@
                 "pt": "msg",
                 "to": "Teste URA Dinamica",
                 "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload.dados",
+                "pt": "msg",
+                "to": "[{\"acao\":\"tts\",\"acao_dados\":{\"mensagem\":\"Seja bem-vindo ao teste de URA! Esta é a primeira etapa.\"}}]",
+                "tot": "json"
             }
         ],
         "action": "",
@@ -404,7 +411,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 370,
+        "x": 390,
         "y": 180,
         "wires": [
             [
